@@ -36,12 +36,30 @@ export function AuthProvider({ children }) {
   }
 
   async function signUp(email, password, name, role, skills) {
-    const { data, error } = await supabase.auth.signUp({ email, password })
+    const { data, error } = await supabase.auth.signUp({ 
+      email, 
+      password,
+      options: {
+        emailRedirectTo: window.location.origin,
+        data: { name, role, skills }
+      }
+    })
     if (error) return { error }
+    
+    // Check if email confirmation is required
+    if (data.user && !data.session) {
+      return { 
+        error: { 
+          message: 'Please check your email to confirm your account before logging in.' 
+        } 
+      }
+    }
+    
     if (data.user) {
-      await supabase.from('profiles').insert({
+      const { error: profileError } = await supabase.from('profiles').insert({
         id: data.user.id, email, name, role, skills
       })
+      if (profileError) return { error: profileError }
     }
     return { error: null }
   }
