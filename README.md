@@ -31,23 +31,6 @@ This project solves the **real-world challenge of managing dependent tasks**: pr
 
 ---
 
-## 🎬 Demo
-
-**Live App:** https://work-process-tracker-920cna5y8-ms-projects-94bf79d2.vercel.app/
-
-**Demo Credentials:**
-- **Admin:** `admin@nestup.com` / `admin123`
-- **Member:** `member@nestup.com` / `member123`
-
-### Quick Demo Flow
-
-1. **Login as Admin** → Create 3-4 work items
-2. **Add Dependencies** → Link tasks with partial/full dependencies
-3. **Try Circular** → Attempt to create A→B→C→A (will reject!)
-4. **Update Progress** → Watch downstream tasks auto-unblock
-5. **Switch to Member** → See assigned tasks and update progress
-
----
 
 ## 🏗️ Architecture
 
