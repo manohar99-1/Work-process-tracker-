@@ -50,12 +50,25 @@ export function useMembers() {
 }
 
 export async function createWorkItem(item) {
+  console.log('=== createWorkItem called ===')
+  console.log('Item to insert:', item)
+  
   const { data, error } = await supabase.from('work_items').insert(item).select().single()
+  
+  console.log('Insert result:', { data, error })
+  
   return { data, error }
 }
 
 export async function updateWorkItem(id, updates) {
+  console.log('=== updateWorkItem called ===')
+  console.log('ID:', id)
+  console.log('Updates:', updates)
+  
   const { data, error } = await supabase.from('work_items').update(updates).eq('id', id).select().single()
+  
+  console.log('Update result:', { data, error })
+  
   return { data, error }
 }
 
