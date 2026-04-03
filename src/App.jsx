@@ -40,13 +40,13 @@ function RootRedirect() {
   
   // Wait for profile to load before redirecting
   if (!profile) {
-    return (
-      <div className="page-center">
-        <Spinner />
-        <p style={{ marginTop: '1rem', color: '#666' }}>Loading your profile...</p>
-      </div>
-    )
-  }
+  return (
+    <div className="page-center">
+      <Spinner />
+      <p style={{ marginTop: '1rem',color:'#666' }}>Preparing your dashboard...</p>
+    </div>
+  )
+}
   
   return <Navigate to={profile.role === 'admin' ? '/admin' : '/member'} replace />
 }
