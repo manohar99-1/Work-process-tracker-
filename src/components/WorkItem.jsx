@@ -90,9 +90,17 @@ export function WorkItemForm({ item, members, onSave, onClose }) {
       created_by: profile?.id,
     }
 
-    const { error } = item
+    console.log('=== WorkItem Form Submit ===')
+    console.log('Form values:', form)
+    console.log('Payload to save:', payload)
+    console.log('assigned_to (raw):', form.assigned_to)
+    console.log('assigned_to (in payload):', payload.assigned_to)
+
+    const { error, data } = item
       ? await updateWorkItem(item.id, payload)
       : await createWorkItem(payload)
+
+    console.log('Save result:', { error, data })
 
     if (error) setError(error.message)
     else { onSave(); onClose() }
