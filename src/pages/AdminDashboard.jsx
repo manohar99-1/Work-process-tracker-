@@ -73,7 +73,10 @@ export default function AdminDashboard() {
         <nav className="sidebar-nav">
           <span className="nav-label">Workspace</span>
           {VIEWS.map(v => (
-            <button key={v} className={`nav-item ${view === v ? 'active' : ''}`} onClick={() => setView(v)}>
+            <button key={v} className={`nav-item ${view === v ? 'active' : ''}`} onClick={() => {
+  setView(v)
+  setOpen(false)
+}}>
               {v === 'Board' ? '⊞' : v === 'List' ? '☰' : '⬡'} {v}
             </button>
           ))}
