@@ -19,7 +19,25 @@ export default function MemberDashboard() {
   const refetch = () => { refetchItems(); refetchDeps() }
 
   const myItems = useMemo(
-    () => items.filter(i => i.assigned_to === profile?.id),
+    () => {
+      console.log('=== Member Dashboard Debug ===')
+      console.log('Profile ID:', profile?.id)
+      console.log('Total items loaded:', items.length)
+      console.log('All items:', items.map(i => ({
+        title: i.title,
+        assigned_to: i.assigned_to,
+        assignee: i.assignee
+      })))
+      
+      const filtered = items.filter(i => {
+        const match = i.assigned_to === profile?.id
+        console.log(`Item "${i.title}": assigned_to=${i.assigned_to}, matches=${match}`)
+        return match
+      })
+      
+      console.log('Filtered items for this member:', filtered.length)
+      return filtered
+    },
     [items, profile]
   )
 
