@@ -19,6 +19,7 @@ export default function AdminDashboard() {
   const [view, setView] = useState('Board')
   const [filter, setFilter] = useState('all')
   const [search, setSearch] = useState('')
+  const [open, setOpen] = useState(false)
   const [selectedItem, setSelectedItem] = useState(null)
   const [showForm, setShowForm] = useState(false)
   const [editItem, setEditItem] = useState(null)
@@ -117,6 +118,14 @@ export default function AdminDashboard() {
       {/* Main content */}
       <main className="main-content">
         <div className="main-header">
+          <button 
+    onClick={() => setOpen(!open)} 
+    className="btn btn-ghost"
+    style={{ marginRight: '10px' }}
+  >
+    ☰
+  </button>
+          
           <div>
             <h1>Work Items</h1>
             <p className="main-subtitle">Track tasks, dependencies, and team progress</p>
