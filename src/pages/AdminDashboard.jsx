@@ -64,8 +64,7 @@ export default function AdminDashboard() {
 
     {/* Sidebar */}
     <aside className={`sidebar ${open ? "open" : ""}`}>
-      {/* Sidebar */}
-      <aside className={`sidebar ${open ? "open" : ""}`}>
+  
         <div className="sidebar-brand">
           <span className="brand-dot" />
           <span>NestUp</span>
