@@ -54,7 +54,7 @@ export default function AdminDashboard() {
   return (
     <div className="dashboard">
       {/* Sidebar */}
-      <aside className="sidebar">
+      <aside className={`sidebar ${open ? "open" : ""}`}>
         <div className="sidebar-brand">
           <span className="brand-dot" />
           <span>NestUp</span>
