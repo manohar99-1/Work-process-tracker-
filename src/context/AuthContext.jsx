@@ -25,10 +25,42 @@ export function AuthProvider({ children }) {
   }, [])
 
   async function fetchProfile(userId) {
-    const { data } = await supabase.from('profiles').select('*').eq('id', userId).single()
+  const { data, error } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('id', userId)
+    .single()
+
+  if (error || !data) {
+    console.log("Profile missing, creating...")
+
+    // ✅ Auto-create profile if missing
+    const { data: userData } = await supabase.auth.getUser()
+
+    const newProfile = {
+      id: userId,
+      email: userData.user.email,
+      name: userData.user.user_metadata?.name || "User",
+      role: userData.user.user_metadata?.role || "member",
+      skills: userData.user.user_metadata?.skills || []
+    }
+
+    const { error: insertError } = await supabase
+      .from('profiles')
+      .insert(newProfile)
+
+    if (insertError) {
+      console.log("Profile creation failed:", insertError)
+      setProfile(null)
+    } else {
+      setProfile(newProfile)
+    }
+  } else {
     setProfile(data)
-    setLoading(false)
   }
+
+  setLoading(false)
+}
 
   async function signIn(email, password) {
     const { error } = await supabase.auth.signInWithPassword({ email, password })
