@@ -53,7 +53,17 @@ export default function AdminDashboard() {
   if (itemsLoading || depsLoading) return <div className="page-center"><Spinner /></div>
 
   return (
-    <div className="dashboard">
+  <div className="dashboard">
+
+    {open && (
+      <div 
+        className="overlay"
+        onClick={() => setOpen(false)}
+      />
+    )}
+
+    {/* Sidebar */}
+    <aside className={`sidebar ${open ? "open" : ""}`}>
       {/* Sidebar */}
       <aside className={`sidebar ${open ? "open" : ""}`}>
         <div className="sidebar-brand">
